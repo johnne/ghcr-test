@@ -1,0 +1,13 @@
+logo: "MyExampleWorkflow"
+font: "small"
+tagline: "A Snakemake workflow configured with snk.yaml"
+
+cli:
+  text:
+    type: str
+    help: "Text to print"
+    required: True
+  output:
+    type: Path
+    help: "File to write text to"
+    required: True

@@ -1,0 +1,65 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "my-example-workflow"
+dynamic = ["version"]
+description = ''
+readme = "README.md"
+requires-python = ">=3.8"
+keywords = []
+authors = [
+  { name = "John Sundh", email = "john.sundh@scilifelab.se" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "snk-cli",
+]
+
+[project.urls]
+Documentation = "https://github.com/John Sundh/my-example-workflow#readme"
+Issues = "https://github.com/John Sundh/my-example-workflow/issues"
+Source = "https://github.com/John Sundh/my-example-workflow"
+
+[project.scripts]
+my-example-workflow = "my_example_workflow.cli:my_example_workflow"
+
+[tool.hatch.version]
+path = "src/my_example_workflow/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/my_example_workflow tests}"
+
+[tool.coverage.run]
+source_pkgs = ["my_example_workflow", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/my_example_workflow/__about__.py",
+]
+
+[tool.coverage.paths]
+my_example_workflow = ["src/my_example_workflow", "*/my-example-workflow/src/my_example_workflow"]
+tests = ["tests", "*/my-example-workflow/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
